@@ -1,4 +1,4 @@
-package io.github.hmnshgpt455.common.request;
+package io.github.hmnshgpt455.common.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class SignUpRequest implements Serializable {
+public class UserAuthenticationDTO implements Serializable {
 
     static final long serialVersionUID = -8479810303125337575L;
 
