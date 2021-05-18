@@ -4,6 +4,7 @@ import io.github.hmnshgpt455.common.request.SignUpRequest;
 import io.github.hmnshgpt455.common.responses.AvailabilityResponse;
 import io.github.hmnshgpt455.common.responses.SignUpResponse;
 import io.github.hmnshgpt455.gitissuetrackerauthenticationservice.domain.UserAuthentication;
+import io.github.hmnshgpt455.gitissuetrackerauthenticationservice.exception.definitions.InvalidRequest;
 import io.github.hmnshgpt455.gitissuetrackerauthenticationservice.repositories.UserAuthenticationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +20,11 @@ public class UserAuthenticationServiceImpl implements UserAuthenticationService 
 
     @Override
     public SignUpResponse signUp(SignUpRequest signUpRequest) {
+
+        if (userAuthenticationRepository.existsByEmail(signUpRequest.getEmail())) {
+            throw new InvalidRequest("Email already present");
+        }
+
         UserAuthentication userAuthenticationEntity = UserAuthentication.builder()
                 .email(signUpRequest.getEmail())
                 .username(signUpRequest.getUsername())
