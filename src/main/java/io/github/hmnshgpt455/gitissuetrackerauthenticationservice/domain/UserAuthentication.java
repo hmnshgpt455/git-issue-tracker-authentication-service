@@ -44,6 +44,9 @@ public class UserAuthentication {
     @Column(unique = true, nullable = false)
     private String username;
 
+    @Column(unique = true, nullable = false)
+    private String email;
+
     @ManyToMany
     @JoinTable(
             name = "user_role",

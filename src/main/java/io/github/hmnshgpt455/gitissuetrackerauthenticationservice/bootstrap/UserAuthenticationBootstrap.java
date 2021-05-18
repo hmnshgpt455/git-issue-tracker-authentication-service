@@ -50,12 +50,14 @@ public class UserAuthenticationBootstrap implements CommandLineRunner {
                     .password("pwd1")
                     .roles(roleGroup1)
                     .username("hmnshgpt455")
+                    .email("ss@ss.com")
                     .build();
             UserAuthentication userAuthentication2 = UserAuthentication.builder()
                     .userId(UUID.randomUUID())
                     .password("pwd2")
                     .roles(roleGroup2)
                     .username("hmnshgpt456")
+                    .email("ss@dd.com")
                     .build();
 
             userAuthenticationRepository.save(userAuthentication1);
