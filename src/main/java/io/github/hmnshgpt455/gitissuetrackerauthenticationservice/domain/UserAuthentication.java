@@ -35,7 +35,7 @@ public class UserAuthentication {
     @UpdateTimestamp
     private Timestamp lastModifiedDate;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String password;
 
     @Column(unique = true, nullable = false)
