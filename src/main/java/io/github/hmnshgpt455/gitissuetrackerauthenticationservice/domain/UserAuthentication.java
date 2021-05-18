@@ -35,9 +35,6 @@ public class UserAuthentication {
     @UpdateTimestamp
     private Timestamp lastModifiedDate;
 
-    @Column(updatable = false, unique = true, nullable = false)
-    private UUID userId;
-
     @Column(unique = true, nullable = false)
     private String password;
 

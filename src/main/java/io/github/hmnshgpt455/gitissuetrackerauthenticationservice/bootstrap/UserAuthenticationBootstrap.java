@@ -45,24 +45,22 @@ public class UserAuthenticationBootstrap implements CommandLineRunner {
             roleGroup2.add(role2);
             roleGroup2.add(role3);
 
-            UserAuthentication userAuthentication1 = UserAuthentication.builder()
-                    .userId(UUID.randomUUID())
-                    .password("pwd1")
-                    .roles(roleGroup1)
-                    .username("hmnshgpt455")
-                    .email("ss@ss.com")
-                    .build();
-            UserAuthentication userAuthentication2 = UserAuthentication.builder()
-                    .userId(UUID.randomUUID())
-                    .password("pwd2")
-                    .roles(roleGroup2)
-                    .username("hmnshgpt456")
-                    .email("ss@dd.com")
-                    .build();
-
-            userAuthenticationRepository.save(userAuthentication1);
-
-            userAuthenticationRepository.save(userAuthentication2);
+//            UserAuthentication userAuthentication1 = UserAuthentication.builder()
+//                    .password("pwd1")
+//                    .roles(roleGroup1)
+//                    .username("hmnshgpt455")
+//                    .email("ss@ss.com")
+//                    .build();
+//            UserAuthentication userAuthentication2 = UserAuthentication.builder()
+//                    .password("pwd2")
+//                    .roles(roleGroup2)
+//                    .username("hmnshgpt456")
+//                    .email("ss@dd.com")
+//                    .build();
+//
+//            userAuthenticationRepository.save(userAuthentication1);
+//
+//            userAuthenticationRepository.save(userAuthentication2);
         }
     }
 }
