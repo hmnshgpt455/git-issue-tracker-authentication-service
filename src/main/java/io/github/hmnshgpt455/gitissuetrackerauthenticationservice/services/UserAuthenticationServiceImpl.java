@@ -1,6 +1,7 @@
 package io.github.hmnshgpt455.gitissuetrackerauthenticationservice.services;
 
 import io.github.hmnshgpt455.common.request.SignUpRequest;
+import io.github.hmnshgpt455.common.responses.AvailabilityResponse;
 import io.github.hmnshgpt455.common.responses.SignUpResponse;
 import io.github.hmnshgpt455.gitissuetrackerauthenticationservice.domain.UserAuthentication;
 import io.github.hmnshgpt455.gitissuetrackerauthenticationservice.repositories.UserAuthenticationRepository;
@@ -30,6 +31,13 @@ public class UserAuthenticationServiceImpl implements UserAuthenticationService 
         return SignUpResponse.builder()
                 .email(persistedEntity.getEmail())
                 .username(persistedEntity.getUsername())
+                .build();
+    }
+
+    @Override
+    public AvailabilityResponse checkUsernameAvailability(String username) {
+        return AvailabilityResponse.builder()
+                .isAvailable(!userAuthenticationRepository.existsByUsername(username))
                 .build();
     }
 }
