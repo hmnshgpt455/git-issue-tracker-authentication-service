@@ -5,6 +5,7 @@ import io.github.hmnshgpt455.common.responses.AvailabilityResponse;
 import io.github.hmnshgpt455.common.responses.SignUpResponse;
 import io.github.hmnshgpt455.gitissuetrackerauthenticationservice.services.UserAuthenticationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -17,8 +18,13 @@ public class UserAuthenticationController {
 
     private final UserAuthenticationService userAuthenticationService;
 
-    @PostMapping("/signUp")
-    public SignUpResponse signUp(@Valid @RequestBody UserAuthenticationDTO userAuthenticationDTO) {
+    @PostMapping(path = "/signUp", consumes = { MediaType.APPLICATION_JSON_VALUE })
+    public SignUpResponse signUpViaPayload(@Valid @RequestBody UserAuthenticationDTO userAuthenticationDTO) {
+        return userAuthenticationService.signUp(userAuthenticationDTO);
+    }
+
+    @PostMapping(path = "/signUp", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
+    public SignUpResponse signUpViaForm(@Valid UserAuthenticationDTO userAuthenticationDTO) {
         return userAuthenticationService.signUp(userAuthenticationDTO);
     }
 
