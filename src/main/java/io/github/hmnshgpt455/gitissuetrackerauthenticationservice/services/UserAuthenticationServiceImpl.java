@@ -12,7 +12,10 @@ import io.github.hmnshgpt455.gitissuetrackerauthenticationservice.repositories.U
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Base64;
 
 @Service
 @Slf4j
@@ -23,6 +26,7 @@ public class UserAuthenticationServiceImpl implements UserAuthenticationService 
     private final RoleService roleService;
     private final UserDtoAndUserAuthenticationDtoMapper userDtoAndUserAuthenticationDtoMapper;
     private final JmsTemplate jmsTemplate;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public SignUpResponse signUp(UserAuthenticationDTO userAuthenticationDTO) {
@@ -34,7 +38,7 @@ public class UserAuthenticationServiceImpl implements UserAuthenticationService 
         UserAuthentication userAuthenticationEntity = UserAuthentication.builder()
                 .email(userAuthenticationDTO.getEmail())
                 .username(userAuthenticationDTO.getUsername())
-                .password(userAuthenticationDTO.getPassword())
+                .password(encodePassword(userAuthenticationDTO.getPassword()))
                 .roles(roleService.findPersistedRoleEntitiesByNames(userAuthenticationDTO.getRoles()))
                 .build();
 
@@ -45,6 +49,11 @@ public class UserAuthenticationServiceImpl implements UserAuthenticationService 
                 .email(persistedEntity.getEmail())
                 .username(persistedEntity.getUsername())
                 .build();
+    }
+
+    private String encodePassword(String password) {
+        String base64DecodedPassword = new String(Base64.getDecoder().decode(password));
+        return passwordEncoder.encode(base64DecodedPassword);
     }
 
     private void sendMessageToSaveUserDetails(UserAuthenticationDTO userAuthenticationDTO) {
